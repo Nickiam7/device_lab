@@ -14,6 +14,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 gem 'uikit2-rails', '~> 0.1.9'
+gem 'devise', '~> 4.2'
 
 group :development, :test do
   gem 'byebug', platform: :mri
