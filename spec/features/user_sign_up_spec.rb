@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "User sign up", type: :feature do
 
 	scenario "successfully" do
-		visit '/users/sign_up'
+		visit new_user_registration_path
 		
 		expect(page).to have_content 'Create your device lab account'
 		fill_in "Username", with: "test_user"
@@ -12,8 +12,10 @@ RSpec.feature "User sign up", type: :feature do
 		fill_in "Password confirmation", with: '12345678'
 		click_button "Sign up"
 
-		expect(current_path).to eq root_path
-		expect(page).to have_content "Welcome to the device lab"
+		user = build(:user)
+
+		expect(current_path).to eq "/users/1"
+		expect(page).to have_content "Hello #{user.username}"
 	end
 
 	context "failed" do
