@@ -1,3 +1,13 @@
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <%= flash[:alert] %>
+  </div>
+<% elsif flash[:notice] %>
+  <%= flash[:notice] %> 
+<% end %>
 <h2>Hello <%= @user.username %></h2>
 
 <hr>
