@@ -5,7 +5,7 @@ RSpec.feature "User sign up", type: :feature do
 	scenario "successfully" do
 		visit new_user_registration_path
 		
-		expect(page).to have_content 'Create your device lab account'
+		expect(page).to have_content "Create your device lab account"
 		fill_in "Username", with: "test_user"
 		fill_in "Email", with: 'test@gmail.com'
 		fill_in "Password", with: '12345678'
@@ -52,9 +52,9 @@ RSpec.feature "User sign up", type: :feature do
 		end
 
 		scenario "already registered email" do
-			create(:user, email: "nick@enova.com")
+			user = create(:user)
 
-			fill_in "Email", with: "nick@enova.com"
+			fill_in "Email", with: user.email
 			fill_in "Password", with: "12345678"
 			fill_in "Password confirmation", with: "12345678"
 			click_button "Sign up"
