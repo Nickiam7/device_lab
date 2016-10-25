@@ -20,6 +20,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5', '>= 3.5.1'
   gem 'capybara', '~> 2.7', '>= 2.7.1'
+  gem 'factory_girl_rails', '~> 4.7'
 end
 
 gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1', group: :test
