@@ -12,7 +12,7 @@ RSpec.feature "User sign up", type: :feature do
 		fill_in "Password confirmation", with: '12345678'
 		click_button "Sign up"
 
-		user = build(:user)
+		user = build(:user, id: 1)
 
 		expect(current_path).to eq "/users/1"
 		expect(page).to have_content "Hello #{user.username}"
