@@ -1,16 +1,34 @@
-<h2>Forgot your password?</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="logo-form">
+        <%= image_tag("enova_logo.png") %>
+      </div>
+      <div class="panel panel-default remove-bottom-margin">
+        <div class="panel-body">
+					<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, html: {class: "form-signup"}) do |f| %>
+					  <% if devise_error_messages!.present? %>
+					    <div class="alert alert-danger">
+					      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					        <span aria-hidden="true">&times;</span>
+					      </button>
+					        <%= devise_error_messages! %>
+					    </div>
+					  <% end %> 
+					  <div class="form-group">
+					    <%= f.email_field :email, autofocus: true, placeholder: :email, class: "form-control" %>
+					  </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+					  <div class="form-group">
+					    <%= f.submit "Send me reset password instructions", class: "btn btn-primary btn-block btn-lg" %>
+					  </div>
+					<% end %>
+				</div>
+			</div>
+			<div class="links">
+				<%= link_to "Sign in", new_user_session_path %> 
+				<%= link_to "Sign up", new_user_registration_path, class: "pull-right" %>
+			</div>	
+		</div>
+	</div>
+</div>
