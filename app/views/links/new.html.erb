@@ -1,0 +1,7 @@
+<h2>Create a new link</h2>
+<%= form_for(@link) do |f| %>
+	<%= f.text_field :url, placeholder: :url %><br>
+	<%= f.text_field :title, placeholder: :title %><br>
+	<%= f.text_field :brand, placeholder: :brand %><br>
+	<%= f.submit "Send link to device lab" %>
+<% end %>

@@ -9,6 +9,11 @@
   <%= flash[:notice] %> 
 <% end %>
 <h2>Hello <%= @user.username %></h2>
+<%= link_to "Create new link", new_link_path, class: "btn btn-success" %>
+
+<% @links.each do |link| %>
+	<%= link.url %>
+<% end %>
 
 <hr>
 <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
