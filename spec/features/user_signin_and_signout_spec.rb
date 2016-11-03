@@ -6,9 +6,8 @@ RSpec.feature "User sign in and out", type: :feature do
 
 		scenario "successfully" do
 			user = create(:user)
-
+			
 			visit new_user_session_path 
-			expect(page).to have_css("h2", text: "Sign in")
 
 			sign_in(user.email, user.password)
 
@@ -18,7 +17,7 @@ RSpec.feature "User sign in and out", type: :feature do
 
 			click_link "Sign out"
 
-			expect(current_path).to eq new_user_session_path
+			expect(current_path).to eq root_path
 			expect(page).to have_content "Signed out successfully." 
 		end
 
@@ -26,7 +25,6 @@ RSpec.feature "User sign in and out", type: :feature do
 			user = create(:user)
 
 			visit new_user_session_path
-			expect(page).to have_css("h2", text: "Sign in")
 
 			sign_in(user.email, "wrong password")
 
