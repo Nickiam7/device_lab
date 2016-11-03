@@ -1,19 +1,9 @@
-<% if flash[:alert] %>
-  <div class="alert alert-danger">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <%= flash[:alert] %>
-  </div>
-<% elsif flash[:notice] %>
-  <%= flash[:notice] %> 
-<% end %>
+<%= render partial: "shared/flash" %>
 <h2>Hello <%= @user.username %></h2>
 <%= link_to "Create new link", new_link_path, class: "btn btn-success" %>
 
 <% @links.each do |link| %>
-	<%= link.url %>
+	<p><%= link.url %></p>
 <% end %>
-
 <hr>
 <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
