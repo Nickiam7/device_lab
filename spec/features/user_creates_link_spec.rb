@@ -18,6 +18,8 @@ RSpec.feature "User creates a link", type: :feature do
 		expect(current_path).to eq(new_link_path)
 		expect(page).to have_css("h2", text: "Create a new link")
 		fill_in "Url", with: link.url
+		fill_in "Title", with: link.title
+		fill_in "Brand", with: link.brand
 		click_button "Send link to device lab"
 
 		expect(current_path).to eq(user_path(user))

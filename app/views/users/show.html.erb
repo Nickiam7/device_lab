@@ -1,9 +1,14 @@
 <%= render partial: "shared/flash" %>
+<div class="container">
 <h2>Hello <%= @user.username %></h2>
 <%= link_to "Create new link", new_link_path, class: "btn btn-success" %>
-
-<% @links.each do |link| %>
-	<p><%= link.url %></p>
-<% end %>
-<hr>
-<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+  <div class="row">
+  	<div class="panel panel-default remove-bottom-margin">
+    	<div class="panel-body">
+				<% @links.each do |link| %>
+					<p><%= link.url %></p>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

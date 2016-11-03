@@ -1,5 +1,9 @@
 class LinksController < ApplicationController
 
+	def index
+		@links = Link.all
+	end
+
 	def new
 		@link = current_user.links.new
 	end
@@ -8,7 +12,7 @@ class LinksController < ApplicationController
 		@link = current_user.links.new(link_params)
 		if @link.save
 			flash[:success] = "Your link has been sent to the device lab."
-			redirect_to user_path(current_user)
+			redirect_to user_path(current_user)	
 		else
 			render :new
 		end
