@@ -9,6 +9,7 @@
   </head>
 
   <body>
+  <%= render partial: "shared/flash" unless :devise_controller? %>
     <%= yield %>
     <hr>
     <% if user_signed_in? %>

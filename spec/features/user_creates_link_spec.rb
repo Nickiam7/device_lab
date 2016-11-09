@@ -4,7 +4,7 @@ RSpec.feature "User creates a link", type: :feature do
 
 	scenario "Successfully" do
 		user = create(:user, id: 1)
-		link = create(:link)
+		link = create(:link, brand_id: 3)
 
 		visit new_user_session_path
 
@@ -28,7 +28,7 @@ RSpec.feature "User creates a link", type: :feature do
 
 	scenario "Unsuccessfully" do
 		user = create(:user, id: 1)
-		link = build(:link, url: "")
+		link = build(:link, url: "", brand_id: 3)
 
 		visit new_user_session_path
 
