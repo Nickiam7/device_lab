@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.feature "User creates a link", type: :feature do 
 
 	scenario "Successfully" do
-		user = create(:user, id: 1)
-		link = create(:link, brand_id: 3)
+		user = create(:user)
+		brand = create(:brand)
+		link = create(:link, user_id: 1, brand_id: 1)
 
 		visit new_user_session_path
 
@@ -19,7 +20,8 @@ RSpec.feature "User creates a link", type: :feature do
 		expect(page).to have_css("h2", text: "Create a new link")
 		fill_in "Url", with: link.url
 		fill_in "Title", with: link.title
-		fill_in "Brand", with: link.brand
+		fill_in "Title", with: link.title
+		select "CashNetUSA", from: 'link_brand_id'
 		click_button "Send link to device lab"
 
 		expect(current_path).to eq(user_path(user))
@@ -27,7 +29,7 @@ RSpec.feature "User creates a link", type: :feature do
 	end
 
 	scenario "Unsuccessfully" do
-		user = create(:user, id: 1)
+		user = create(:user)
 		link = build(:link, url: "", brand_id: 3)
 
 		visit new_user_session_path
