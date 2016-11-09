@@ -1,11 +1,22 @@
+$gray-base:              #000 !default;
+$gray-darker:            lighten($gray-base, 13.5%) !default; // #222
+$gray-dark:              lighten($gray-base, 20%) !default;   // #333
+$gray:                   lighten($gray-base, 33.5%) !default; // #555
+$gray-light:             lighten($gray-base, 46.7%) !default; // #777
+$gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
+
+$body-bg:                #fafafa !default;
+$text-color:             $gray-light !default;
+$grid-float-breakpoint:  0;
+$border-radius-base:     2px !default;
+$border-radius-large:    2px !default;
+$brand-primary:          #009bdb;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-html, body {
-	background: #fafafa;
-}
-.btn {
-	border-radius: 2px;
+body {
+	padding-top: 70px;
 }
 .form-control {
 	border: 1px solid rgba(34,36,38,.15);
@@ -17,11 +28,15 @@ html, body {
 	}
 }
 .panel-default {
-	border-radius: 2px; 
 	border: 1px solid rgba(34,36,38,.15);
 	box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
 	&.remove-bottom-margin {
 		margin-bottom: 0 !important;	
+	}
+}
+.panel > .list-group { 
+	.list-group-item {
+		font-size: small;
 	}
 }
 .logo-form {
@@ -48,11 +63,11 @@ html, body {
 	}
 	input[type="email"] {
 		margin-bottom: -1px;
-		border-radius: 2px 2px 0 0;
+		border-radius: $border-radius-base $border-radius-base 0 0;
 	}
 	input[type="password"] {
 		margin-bottom: 10px;
-		border-radius: 0 0 2px 2px;
+		border-radius: 0  0 $border-radius-base $border-radius-base;
 	}
 }
 .form-signup {

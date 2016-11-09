@@ -18,7 +18,7 @@ RSpec.feature "User sign in and out", type: :feature do
 			click_link "Sign out"
 
 			expect(current_path).to eq root_path
-			expect(page).to have_content "Signed out successfully." 
+			expect(page).not_to have_content "Signed out successfully." 
 		end
 
 		scenario "Unsuccessfully" do

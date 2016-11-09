@@ -6,10 +6,12 @@ class LinksController < ApplicationController
 
 	def new
 		@link = current_user.links.new
+		@brands = Brand.all
 	end
 
 	def create
 		@link = current_user.links.new(link_params)
+		@brands = Brand.all
 		if @link.save
 			flash[:success] = "Your link has been sent to the device lab."
 			redirect_to user_path(current_user)	
@@ -21,6 +23,6 @@ class LinksController < ApplicationController
 	private
 
 	def link_params
-		params.require(:link).permit(:url, :title, :brand)
+		params.require(:link).permit(:url, :title, :brand_id)
 	end
 end

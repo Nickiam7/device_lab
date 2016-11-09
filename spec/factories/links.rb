@@ -4,5 +4,6 @@ FactoryGirl.define do
   	title "CashNetUSA Homepage"
   	brand "CNU"
   	user_id 1
+  	brand_id 1
   end
 end

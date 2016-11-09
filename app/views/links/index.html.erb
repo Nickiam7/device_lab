@@ -1,14 +1,38 @@
-<%= render partial: "shared/flash" %>
+<%= render partial: "shared/nav" %>
 <div class="container">
-  <div class="row">
-	  <div class="col-md-12">
-	  	<div class="panel panel-default remove-bottom-margin">
-	    	<div class="panel-body">
-				<% @links.each do |link| %>
-					<%= link.url %>
-				<% end %>
-				</div>
-			</div>
+  	<div class="row">
+	  	<div class="col-md-12">
+		  	<% @links.each do |link| %>
+			  	<div class="panel panel-default">
+			  	  <div class="panel-heading">
+			  	    <h3 class="panel-title">
+			  	    	<%= link.title? ?
+			  	    	sanitize("<a href=\"#{link.url}\" target=\"_blank\">#{link.title}</a>", attributes: %w(href target)) :
+			  	    	sanitize("<a href=\"#{link.url}\" target=\"_blank\">#{link.url}</a>", attributes: %w(href target)) %>
+			  	    </h3>
+			  	  </div>
+			  	  <div class="panel-body">
+			  	  	<%= link_to sanitize("#{link.url}"), target: "_blank", class: "btn btn-primary btn-block"  do %>
+			  	  		View Page <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			  	  	<% end %>
+			  	  </div>
+			  	  <ul class="list-group">
+			  	  	<li class="list-group-item">
+			  	  		<%= link.brand.name %>
+			  	  	</li>
+			  	  	<li class="list-group-item">
+			  	  	  	<div class="row">
+			  	  		  	<div class="col-xs-6">
+			  	  				<%= link.user.username %>
+			  	  		  	</div>
+			  	  		  	<div class="col-xs-6 text-right">
+			  	  				<%= link.created_at.strftime("%b %d, %Y") %>
+			  	  		  	</div>
+		  	  		  	</div>
+			  	  	</li>
+			  	  </ul>
+			  	</div>
+		  	<% end %>
 		</div>
 	</div>
 </div>
