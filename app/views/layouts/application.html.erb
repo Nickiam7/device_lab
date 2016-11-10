@@ -9,7 +9,8 @@
   </head>
 
   <body>
-  <%= render partial: "shared/flash" unless :devise_controller? %>
+  <%= render partial: "shared/flash" %>
+  <%= render partial: "shared/nav" %>
     <%= yield %>
     <hr>
     <% if user_signed_in? %>

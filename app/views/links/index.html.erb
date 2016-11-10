@@ -6,9 +6,12 @@
 			  	<div class="panel panel-default">
 			  	  <div class="panel-heading">
 			  	    <h3 class="panel-title">
-			  	    	<%= link.title? ?
-			  	    	sanitize("<a href=\"#{link.url}\" target=\"_blank\">#{link.title}</a>", attributes: %w(href target)) :
-			  	    	sanitize("<a href=\"#{link.url}\" target=\"_blank\">#{link.url}</a>", attributes: %w(href target)) %>
+			  	    	<span class="label label-default pull-right"><%= link.brand.name %></span>
+			  	    	<% if link.title? %>
+			  				<%= link_to sanitize(link.title).truncate_words(3), sanitize(link.url), target: "_blank" %>
+			  			<% else %>
+			  				<%= link_to sanitize(link.url), sanitize(link.url, attributes: %w(href target)), target: "_blank" %>
+			  			<% end %>	
 			  	    </h3>
 			  	  </div>
 			  	  <div class="panel-body">
@@ -18,17 +21,7 @@
 			  	  </div>
 			  	  <ul class="list-group">
 			  	  	<li class="list-group-item">
-			  	  		<%= link.brand.name %>
-			  	  	</li>
-			  	  	<li class="list-group-item">
-			  	  	  	<div class="row">
-			  	  		  	<div class="col-xs-6">
-			  	  				<%= link.user.username %>
-			  	  		  	</div>
-			  	  		  	<div class="col-xs-6 text-right">
-			  	  				<%= link.created_at.strftime("%b %d, %Y") %>
-			  	  		  	</div>
-		  	  		  	</div>
+	  	  				<small><em>Posted by: <strong><%= link.user.username %></strong>, on <strong><%= link.created_at.strftime("%b %d, %Y") %></strong></em></small>
 			  	  	</li>
 			  	  </ul>
 			  	</div>
