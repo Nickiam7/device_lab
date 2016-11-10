@@ -20,6 +20,33 @@ class LinksController < ApplicationController
 		end
 	end
 
+	def edit
+		@link = Link.find(params[:id])
+		@brands = Brand.all
+	end
+
+	def update
+		@link = Link.find(params[:id])
+		@brands = Brand.all
+		if @link.update_attributes(link_params)
+			flash[:success] = "#{@link.title} has been updated."
+			redirect_to user_path(current_user)	
+		else
+			flash[:alert] = "Something went wrong."
+			render :new
+		end
+	end
+
+	def destroy
+		@link = Link.find(params[:id])
+		if @link.destroy
+			flash[:success] = "#{@link.title} has been deleted."
+		else
+			flash[:alert] = "Something went wrong."
+		end
+		redirect_to user_path(current_path)
+	end
+
 	private
 
 	def link_params

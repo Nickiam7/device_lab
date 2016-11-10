@@ -9,8 +9,10 @@
   </head>
 
   <body>
-  <%= render partial: "shared/flash" %>
-  <%= render partial: "shared/nav" %>
+    <%= render partial: "shared/nav" %>
+    <div class="container">
+      <%= render partial: "shared/flash" unless :devise_controller? %>
+    </div>
     <%= yield %>
     <hr>
     <% if user_signed_in? %>

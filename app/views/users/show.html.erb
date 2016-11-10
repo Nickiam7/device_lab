@@ -1,14 +1,55 @@
 <div class="container">
 <%= render partial: "shared/flash" %>
-<h2>Hello <%= @user.username %></h2>
-<%= link_to "Create new link", new_link_path, class: "btn btn-success" %>
-  <div class="row">
-  	<div class="panel panel-default remove-bottom-margin">
-    	<div class="panel-body">
-				<% @links.each do |link| %>
-					<p><%= link.url %></p>
-				<% end %>
+<h2>Hello <%= @user.username %> <%= link_to "Create new link", new_link_path, class: "btn btn-success pull-right" %></h2>
+<hr>
+	<div class="row">
+		<div class="col-md-9">
+			<div class="panel panel-default">
+				<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Link text</th>
+							<th>Link url</th>
+							<th>Brand</th>
+							<th colspan="2">Posted on</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @links.each do |link| %>
+							<tr>
+								<td><%= link.title %></td>
+								<td><%= link_to sanitize(link.url), sanitize(link.url), target: "_blank" %></td>
+								<td><%= link.brand.full_name %></td>
+								<td><%= link.created_at.strftime("%b %d, %Y") %></td>
+								<td class="text-right">
+									<div class="btn-group" role="group">
+									<%= link_to "Edit", edit_link_path(link), class: "btn btn-sm btn-default" %><%= link_to "Delete", link_path(link), method: :delete, data: {confirm: "Are you sure you want to delete \"#{link.title}\"?"}, class: "btn btn-sm btn-default" %> 
+									</div>
+								</td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+				</div>
 			</div>
+		</div>
+		<div class="col-md-3">
+
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Links by brand:</h3>
+			  </div>
+			  <ul class="list-group">
+			  	<% @brands.each do |brand| %>
+			  		<li class="list-group-item">
+			  		<span class="badge"><%= brand.links.where(user: current_user).count %></span>
+			  			<%= brand.full_name %>
+			  		</li>
+			  	<% end %>
+			  </ul>
+			</div>			
+
 		</div>
 	</div>
 </div>

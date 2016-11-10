@@ -4,5 +4,6 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 		@links = current_user.links
+		@brands = Brand.all
 	end
 end
