@@ -6,7 +6,6 @@
       </div>
       <div class="panel panel-default remove-bottom-margin">
         <div class="panel-body">
-        <%= render partial: "/shared/flash" %>
           <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin"}) do |f| %>
             <div class="form-group">
               <%= f.email_field :email, placeholder: :email, class: "form-control" %>
