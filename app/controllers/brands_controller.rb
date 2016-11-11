@@ -46,7 +46,6 @@ class BrandsController < ApplicationController
 		end
 	end
 
-
 	private
 
 	def brand_params

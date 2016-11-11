@@ -1,6 +1,15 @@
-<div class="panel panel-default remove-bottom-margin">
-  <div class="panel-body">
+<div class="panel panel-default">
+	<div class="panel-body">
 		<%= form_for(@brand) do |f| %>
+			<% if @brand.errors.any? %>
+				<div class="alert alert-danger">
+					<ul>
+						<% @brand.errors.full_messages.each do |msg| %>
+							<li><%= msg %></li>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
 			<div class="form-group">
 				<%= f.text_field :name, placeholder: "Brand abbreviation", class: "form-control" %>
 			</div>
@@ -11,5 +20,6 @@
 				<%= f.submit class: "btn btn-primary btn-lg btn-block" %>
 			</div>
 		<% end %>
+		<%= link_to "< back", :back %>
 	</div>
 </div>

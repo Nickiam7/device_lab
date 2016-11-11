@@ -44,7 +44,7 @@ class LinksController < ApplicationController
 		else
 			flash[:alert] = "Something went wrong."
 		end
-		redirect_to user_path(current_path)
+		redirect_to user_path(current_user)
 	end
 
 	private
