@@ -1,13 +1,12 @@
 <div class="container">
-<%= render partial: "shared/flash" %>
 <h2>Manage Brands <%= link_to "Add new brand", new_brand_path, class: "btn btn-success pull-right" %></h2>
 <hr>
 <div class="panel panel-default">
-	<table class="table">
+	<table class="table table-hover table-responsive">
 		<thead>
 			<tr>
-				<th>Full Brand name</th>
-				<th colspan="2">Brand name</th>
+				<th>Brand name</th>
+				<th colspan="2">Brand abbreviation</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -17,7 +16,7 @@
 				<td><%= brand.name %></td>
 				<td class="text-right">
 					<div class="btn-group" role="group">
-					<%= link_to "Edit", edit_brand_path(brand), class: "btn btn-default" %><%= link_to "Delete", brand_path(brand), method: :delete, data: {confirm: "Are you sure you want to delete #{brand.full_name}?"}, class: "btn btn-default" %> 
+					<%= link_to "Edit", edit_brand_path(brand), class: "btn btn-sm btn-default" %><%= link_to "Delete", brand_path(brand), method: :delete, data: {confirm: "Are you sure you want to delete \"#{brand.full_name}\"?"}, class: "btn btn-sm btn-default" %> 
 					</div>
 				</td>
 			</tr>

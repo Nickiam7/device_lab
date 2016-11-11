@@ -1,5 +1,4 @@
 <div class="container">
-<%= render partial: "shared/nav" %>
   	<div class="row">
 	  	<div class="col-md-12">
 		  	<% @links.each do |link| %>
@@ -8,7 +7,7 @@
 			  	    <h3 class="panel-title">
 			  	    	<span class="label label-default pull-right"><%= link.brand.name %></span>
 			  	    	<% if link.title? %>
-			  				<%= link_to sanitize(link.title).truncate_words(3), sanitize(link.url), target: "_blank" %>
+			  				<%= link_to link.title.truncate_words(3), sanitize(link.url), target: "_blank" %>
 			  			<% else %>
 			  				<%= link_to sanitize(link.url), sanitize(link.url), target: "_blank" %>
 			  			<% end %>	
