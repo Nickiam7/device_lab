@@ -1,5 +1,9 @@
 <div class="container">
-<h2>Manage Brands <%= link_to "Add new brand", new_brand_path, class: "btn btn-success pull-right" %></h2>
+<h2>Manage Brands 
+	<%= link_to new_brand_path, class: "btn btn-primary pull-right" do %>
+		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add new brand
+	<% end %>	
+</h2>
 <hr>
 <div class="panel panel-default">
 	<table class="table table-hover table-responsive">

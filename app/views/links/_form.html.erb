@@ -1,4 +1,4 @@
-<div class="panel panel-default remove-bottom-margin">
+<div class="panel panel-default">
 	<div class="panel-body">
 		<%= form_for(@link) do |f| %>
 			<% if @link.errors.any? %>
@@ -23,6 +23,8 @@
 				<%= f.submit "Send link to device lab", class: "btn btn-primary btn-lg btn-block" %>
 			</div>
 		<% end %>
-		<%= link_to "< back", :back %>
 	</div>	
 </div>
+<%= link_to  :back do %>
+	&larr; back
+<% end %>
