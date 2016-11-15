@@ -1,6 +1,5 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
   <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -10,18 +9,19 @@
       </button>
       <%= link_to "enova", root_path, class: "navbar-brand" %>
     </div>
-
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">Gary</a></li>
-      <li><a href="#">Nick</a></li>
-      <% if user_signed_in? %>
-        <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "small" %></a></li>
-      <% else %>
-        <li><%= link_to "Log in", new_user_session_path, class: "small" %></a></li>
-      <% end %>
+        <% if current_page?(root_path) %>
+          <li><a href="#">Gary</a></li>
+          <li><a href="#">Nick</a></li>
+        <% else %>
+          <% if user_signed_in? %>
+            <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></a></li>
+          <% else %>
+            <li><%= link_to "Log in", new_user_session_path %></a></li>
+          <% end %>
+        <% end %>
       </ul>
-    </div><!-- /.navbar-collapse -->
-
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>
