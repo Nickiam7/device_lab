@@ -14,7 +14,7 @@ class LinksController < ApplicationController
 		@brands = Brand.all
 		if @link.save
 			flash[:success] = "Your link has been sent to the device lab."
-			redirect_to user_path(current_user)	
+			redirect_to user_path(current_user)		
 		else
 			render :new
 		end

@@ -16,6 +16,14 @@ $brand-primary:          #009bdb;
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+@media (max-width: 480px) {
+    .btn-primary {
+    	display: block;
+    	width: 100%;
+    	margin: 2px auto;
+    }
+}
+
 body {
 	padding-top: 70px;
 }
@@ -99,4 +107,7 @@ body {
 	input[type="password"]:last-child {
 		border-radius: 0 0 2px 2px;
 	}
+}
+.pagination {
+	margin: 0;
 }

@@ -1,37 +1,53 @@
 <div class="container">
-<h2>Hello <%= @user.username %> <%= link_to "Create new link", new_link_path, class: "btn btn-success pull-right" %></h2>
+<h2>Hello <%= @user.username %> 
+	<%= link_to new_link_path, class: "btn btn-primary pull-right" do %>
+		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create new link
+	<% end %>	
+</h2>
 <hr>
 	<div class="row">
 		<div class="col-md-9">
 			<div class="panel panel-default">
 				<div class="table-responsive">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>Link text</th>
-							<th>Link url</th>
-							<th>Brand</th>
-							<th colspan="2">Posted on</th>
-						</tr>
-					</thead>
-					<tbody>
-						<% @links.each do |link| %>
+					<table class="table table-hover">
+						<thead>
 							<tr>
-								<td><%= link.title? ? link.title : "Title not provided"  %></td>
-								<td><%= link_to sanitize(link.url), sanitize(link.url), target: "_blank" %></td>
-								<td><%= link.brand.full_name %></td>
-								<td><%= link.created_at.strftime("%b %d, %Y") %></td>
-								<td class="text-right">
-									<div class="btn-group" role="group">
-									<%#= link_to "Edit", edit_link_path(link), class: "btn btn-sm btn-default" %><%= link_to "Delete", link_path(link), method: :delete, data: {confirm: "Are you sure you want to delete \"#{link.title}\"?"}, class: "btn btn-sm btn-default" %> 
-									</div>
-								</td>
+								<th>Link text</th>
+								<th>Link url</th>
+								<th>Brand</th>
+								<th colspan="2">Posted on</th>
 							</tr>
-						<% end %>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							<% if @links.any? %>
+								<% @links.each do |link| %>
+									<tr>
+										<td><%= link.title? ? link.title : "No title provided"  %></td>
+										<td><%= link_to sanitize(link.url), sanitize(link.url), target: "_blank" %></td>
+										<td><%= link.brand.full_name %></td>
+										<td><%= link.created_at.strftime("%m/%d/%y") %></td>
+										<td>
+											<%= link_to "Delete", link_path(link), method: :delete, data: {confirm: "Are you sure you want to delete \"#{link.title}\"?"}, class: "btn btn-sm btn-default" %> 
+
+										</td>
+									</tr>
+								<% end %>
+							<% end %>	
+						</tbody>
+					</table>
 				</div>
+				<div class="panel-footer text-left">
+					<%= will_paginate @links, container: false, renderer: BootstrapPagination::Rails%>
+				</div>	
 			</div>
+			<% if !@links.any? %>
+				<div class="text-center">
+					<h3>You don't have any links yet.</h3>
+					<%= link_to new_link_path, class: "btn btn-primary btn-lg" do %>
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create new link
+					<% end %>
+				</div>
+			<% end %>
 		</div>
 		<div class="col-md-3">
 			<div class="panel panel-default">
