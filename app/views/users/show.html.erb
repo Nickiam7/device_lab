@@ -8,11 +8,21 @@
 	<div class="row">
 		<div class="col-md-9">
 			<div class="panel panel-default">
-				<div class="panel-body">
-					<input>
-				</div>
 				<div class="table-responsive">
 					<table class="table table-hover">
+					<caption><a  data-toggle="collapse" href="#search-collapse" aria-expanded="false" aria-controls="search-collapse" class="search-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</a></caption>
+					<div class="collapse" id="search-collapse">
+					  <div class="search-area">
+					  	<div class="input-group">
+						    <%= search_form_for @q, url: user_path(current_user) do |f| %>
+						    	<%= f.search_field :title_or_brand_full_name_or_brand_name_cont, placeholder: "Search by link title, brand name or brand abbreviation", class: "form-control" %>
+						    	<span class="input-group-btn">
+							    	<%= f.submit "Search", class: "btn btn-primary" %>
+						    	</span>
+						    <% end %>
+					    </div>
+					  </div>
+					</div>
 						<thead>
 							<tr>
 								<th>Link text</th>
@@ -30,7 +40,7 @@
 										<td><%= link.brand.full_name %></td>
 										<td><%= link.created_at.strftime("%m/%d/%y") %></td>
 										<td>
-											<%= link_to "Delete", link_path(link), method: :delete, data: {confirm: "Are you sure you want to delete \"#{link.title}\"?"}, class: "btn btn-sm btn-default" %> 
+											<a tabindex="0" type='button' class='btn btn-sm btn-default' data-toggle='popover' data-placement='left' data-content='Yes, delete <strong>&ldquo;<%= "#{link.title}" %>&rdquo; <br></strong> <%= link_to 'Delete', link_path(link), method: :delete, class: 'btn btn-xs btn-danger' %>'>Delete</a>
 
 										</td>
 									</tr>
@@ -39,7 +49,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="panel-footer text-right">
+				<div class="panel-footer remove-padding text-right">
 					<%= will_paginate @links, container: false, renderer: BootstrapPagination::Rails%>
 				</div>	
 			</div>
@@ -61,7 +71,7 @@
 			  	<% @brands.each do |brand| %>
 			  		<li class="list-group-item">
 			  		<span class="badge"><%= brand.links.where(user: current_user).count %></span>
-			  			<%= brand.full_name %>
+			  			<%= brand.full_name %>	
 			  		</li>
 			  	<% end %>
 			  </ul>
@@ -73,3 +83,13 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(function () {
+	  $('[data-toggle="popover"]').popover({
+	  	html: true,
+	  	animation: true,
+	  	trigger: "focus",
+	  	title : 'Are you sure? <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>',
+	  })
+	})
+</script>

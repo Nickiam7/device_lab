@@ -3,7 +3,8 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		@links = current_user.links.paginate(page: params[:page], per_page: 10)
+		@q = current_user.links.search(params[:q])
+		@links = @q.result.paginate(page: params[:page], per_page: 10)
 		@brands = Brand.all
 	end
 
