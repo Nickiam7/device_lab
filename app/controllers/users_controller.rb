@@ -9,5 +9,10 @@ class UsersController < ApplicationController
 	end
 
 	def admin
+		@users = User.all
+		@links = Link.all
+		@brands = Brand.all
 	end
 end
+
+

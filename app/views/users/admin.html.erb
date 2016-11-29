@@ -1,3 +1,80 @@
 <div class="container">
 	<h1>Admin Area</h1>
+	<hr>
+
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<h2 style="display:inline;"><%= pluralize(@users.count, "User") %></h2>
+				</div>
+				<ul class="list-group">
+					<li class="list-group-item">
+						<small><%= link_to "Manage Users", "#" %></small>
+					</li>
+				</ul>
+			</div>
+			<div class="list-group">
+				<% @users.each do |user| %>
+					<div class="list-group-item">
+						<h4 class="list-group-item-heading"><%= user.username %></h4>
+						<small class="pull-right">
+							<%= link_to "View user", user_path(user), style: "margin-right:10px;" %> 
+							<%= link_to "Delete user", user_path(user), method: :delete, data: {confirm: "Are your sure? This can't be undone."}, class: "text-danger" %> 
+						</small>
+						<p class="list-group-item-text"><%= pluralize(user.links.count, "links") %> </p>
+					</div>
+				<% end %>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<h2 style="display:inline;"><%= pluralize(@links.count, "Link") %></h2>
+				</div>
+				<ul class="list-group">
+					<li class="list-group-item">
+						<small><%= link_to "Manage Links", brands_path %></small>
+					</li>
+				</ul>
+			</div>
+			<div class="list-group">
+				<% @links.each do |link| %>
+					<div class="list-group-item">
+						<h4 class="list-group-item-heading"><%= link.title? ? link.title : link.url %></h4>
+						<small class="pull-right">
+							<%= link_to "Delete link", link_path(link), method: :delete, data: {confirm: "Are your sure? This can't be undone."}, class: "text-danger" %> 
+						</small>
+						<p class="list-group-item-text"><%= link.brand.full_name %> </p>
+					</div>
+				<% end %>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<h2 style="display:inline;"><%= pluralize(@brands.count, "Brand") %></h2>
+				</div>
+		  	  <ul class="list-group">
+		  	  	<li class="list-group-item">
+  	  				<small><%= link_to "Manage Brands", brands_path %></small>
+		  	  	</li>
+		  	  </ul>
+			</div>
+			<div class="list-group">
+				<% @brands.each do |brand| %>
+					<div class="list-group-item">
+						<h4 class="list-group-item-heading"><%= brand.full_name %></h4>
+						<small class="pull-right">
+							<%= link_to "Edit brand", edit_brand_path(brand), style: "margin-right:10px;" %> 
+							<%= link_to "Delete brand", brand_path(brand), method: :delete, data: {confirm: "Are your sure? This can't be undone."}, class: "text-danger" %> 
+						</small>
+						<p class="list-group-item-text"><%= pluralize(brand.links.count, "links") %> </p>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+
 </div>	

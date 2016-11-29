@@ -7,9 +7,9 @@
 			  	    <h3 class="panel-title">
 			  	    	<span class="label label-default pull-right"><%= link.brand.name %></span>
 			  	    	<% if link.title? %>
-			  				<%= link_to link.title.truncate_words(3), sanitize(link.url), target: "_blank" %>
+			  				<%= link_to link.title.truncate(25), sanitize(link.url), target: "_blank" %>
 			  			<% else %>
-			  				<%= link_to sanitize(link.url), sanitize(link.url), target: "_blank" %>
+			  				<%= link_to sanitize(link.url).truncate(55), sanitize(link.url), target: "_blank" %>
 			  			<% end %>	
 			  	    </h3>
 			  	  </div>
@@ -20,7 +20,7 @@
 			  	  </div>
 			  	  <ul class="list-group">
 			  	  	<li class="list-group-item">
-	  	  				<small><em>Posted by: <strong><%= link.user.username %></strong>, on <strong><%= link.created_at.strftime("%b %d, %Y") %></strong></em></small>
+	  	  				<small><em>Posted by: <strong><%= link.user.username %></strong>, on <strong><%= link.created_at.strftime("%b %d, %Y - %l:%M %P") %></strong></em></small>
 			  	  	</li>
 			  	  </ul>
 			  	</div>

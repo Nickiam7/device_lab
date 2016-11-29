@@ -8,21 +8,26 @@
 	<div class="row">
 		<div class="col-md-9">
 			<div class="panel panel-default">
+
+				<div class="collapse" id="search-collapse">
+					<div class="search-area">
+						<div class="row">
+							<div class="col-md-12">
+								<%= search_form_for @q, url: user_path(current_user) do |f| %>
+									<div class="input-group">
+										<%= f.search_field :title_or_brand_full_name_or_brand_name_cont, placeholder: "Search by link title, brand name or brand abbreviation", class: "form-control" %>
+										<span class="input-group-btn">
+											<%= f.submit "Search", class: "btn btn-primary" %>
+										</span>
+									</div>
+								<% end %>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="table-responsive">
 					<table class="table table-hover">
-					<caption><a  data-toggle="collapse" href="#search-collapse" aria-expanded="false" aria-controls="search-collapse" class="search-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</a></caption>
-					<div class="collapse" id="search-collapse">
-					  <div class="search-area">
-					  	<div class="input-group">
-						    <%= search_form_for @q, url: user_path(current_user) do |f| %>
-						    	<%= f.search_field :title_or_brand_full_name_or_brand_name_cont, placeholder: "Search by link title, brand name or brand abbreviation", class: "form-control" %>
-						    	<span class="input-group-btn">
-							    	<%= f.submit "Search", class: "btn btn-primary" %>
-						    	</span>
-						    <% end %>
-					    </div>
-					  </div>
-					</div>
+						<caption><a  data-toggle="collapse" href="#search-collapse" aria-expanded="false" aria-controls="search-collapse" class="search-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</a> <%= link_to "clear results", user_path(current_user) if params[:q] %></caption>
 						<thead>
 							<tr>
 								<th>Link text</th>
@@ -38,11 +43,8 @@
 										<td><%= link.title? ? link.title : "No title provided"  %></td>
 										<td><%= link_to sanitize(link.url), sanitize(link.url), target: "_blank" %></td>
 										<td><%= link.brand.full_name %></td>
-										<td><%= link.created_at.strftime("%m/%d/%y") %></td>
-										<td>
-											<a tabindex="0" type='button' class='btn btn-sm btn-default' data-toggle='popover' data-placement='left' data-content='Yes, delete <strong>&ldquo;<%= "#{link.title}" %>&rdquo; <br></strong> <%= link_to 'Delete', link_path(link), method: :delete, class: 'btn btn-xs btn-danger' %>'>Delete</a>
-
-										</td>
+										<td><small><%= link.created_at.strftime("%m/%d/%y %l:%M %P")%></small></td>
+										<td><%= link_to :Edit, edit_link_path(link), class: "btn btn-default btn-sm" %></td>
 									</tr>
 								<% end %>
 							<% end %>	
@@ -53,7 +55,11 @@
 					<%= will_paginate @links, container: false, renderer: BootstrapPagination::Rails%>
 				</div>	
 			</div>
-			<% if !@links.any? %>
+			<% if !@links.any? && params[:q] %>
+				<div class="text-center">
+					<h3>No results found.</h3>
+				</div>
+			<% elsif !@links.any? %>
 				<div class="text-center">
 					<h3>You don't have any links yet.</h3>
 					<%= link_to new_link_path, class: "btn btn-primary btn-lg" do %>
@@ -83,13 +89,3 @@
 		</div>
 	</div>
 </div>
-<script>
-	$(function () {
-	  $('[data-toggle="popover"]').popover({
-	  	html: true,
-	  	animation: true,
-	  	trigger: "focus",
-	  	title : 'Are you sure? <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>',
-	  })
-	})
-</script>
