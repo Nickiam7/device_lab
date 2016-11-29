@@ -17,6 +17,7 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'devise', '~> 4.2'
 gem 'will_paginate', '~> 3.1', '>= 3.1.5'
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
+gem 'ransack', '~> 1.8', '>= 1.8.2'
 
 group :development, :test do
   gem 'byebug', platform: :mri
