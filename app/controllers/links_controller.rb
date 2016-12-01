@@ -1,7 +1,7 @@
 class LinksController < ApplicationController
 
 	def index
-		@links = Link.all
+		@links = Link.limit(10)
 	end
 
 	def new
@@ -44,7 +44,11 @@ class LinksController < ApplicationController
 		else
 			flash[:alert] = "Something went wrong."
 		end
-		redirect_to user_path(current_user)
+		if current_user.id == 1
+			redirect_to admin_path
+		else
+			redirect_to user_path(current_user)
+		end
 	end
 
 	private

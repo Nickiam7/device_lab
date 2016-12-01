@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
 	def admin
 		@users = User.all
-		@links = Link.all
+		@links = Link.paginate(page: params[:page], per_page: 5)
 		@brands = Brand.all
 	end
 end
